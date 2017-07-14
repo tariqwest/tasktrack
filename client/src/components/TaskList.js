@@ -42,6 +42,7 @@ class TaskList extends React.Component {
       showCreateTask: false,
     };
     this.handleTaskCreate = this.handleTaskCreate.bind(this);
+    this.handleTaskCancel = this.handleTaskCancel.bind(this);
   }
 
   componentDidMount() {
