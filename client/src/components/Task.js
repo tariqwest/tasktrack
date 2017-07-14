@@ -1,8 +1,12 @@
 import React from 'react';
+import TaskEdit from './TaskEdit';
 import { connect } from 'react-redux';
 import { ListItem } from 'material-ui/List';
-import FullscreenDialog from 'material-ui-fullscreen-dialog';
+import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
+import TextField from 'material-ui/TextField';
+import { Row, Col } from 'react-flexbox-grid';
+import { updateTask } from '../actions';
 
 class Task extends React.Component {
   constructor(props) {
@@ -10,15 +14,31 @@ class Task extends React.Component {
     this.state = {
       showEditTask: false,
     };
+    this.handleTaskUpdate = this.handleTaskUpdate.bind(this);
+    this.handleTaskCancel = this.handleTaskCancel.bind(this);
+  }
+
+  handleTaskUpdate(task) {
+    const { dispatch, userId } = this.props;
+    this.setState({ showEditTask: false });
+    console.log(task);
+    dispatch(updateTask(task, userId));
+  }
+
+  handleTaskCancel() {
+    this.setState({ showEditTask: false });
   }
 
   render() {
     const {
+      id,
       title,
       detail,
       startTime,
       endTime,
     } = this.props.task;
+
+   // const duration
 
     return (
       <div>
@@ -28,18 +48,12 @@ class Task extends React.Component {
             secondaryText={detail}
           />
         </div>
-        <FullscreenDialog
+        <Dialog
           open={this.state.showEditTask}
-          onRequestClose={() => this.setState({ showEditTask: false })}
           title={title}
-          actionButton={<FlatButton
-            label="Close"
-            onTouchTap={() => this.setState({ showEditTask: false })}
-          />}
-          appBarStyle={{ backgroundColor: '#000000' }}
         >
-            <div>Edit Task</div>
-        </FullscreenDialog>
+          <TaskEdit task={this.props.task} update={this.handleTaskUpdate} cancel={this.handleTaskCancel} />
+        </Dialog>
       </div>
     );
   }

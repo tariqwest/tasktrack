@@ -6,11 +6,20 @@ import { Card } from 'material-ui/Card';
 import FontIcon from 'material-ui/FontIcon';
 import { grey500 } from 'material-ui/styles/colors';
 import CircularProgress from 'material-ui/CircularProgress';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentAdd from 'material-ui/svg-icons/content/add';
+import Dialog from 'material-ui/Dialog';
 import Task from './Task';
-import { getUserTasks } from '../actions';
-
+import TaskCreate from './TaskCreate';
+import { getUserTasks, createTask } from '../actions';
 
 const styles = {
+  floatingActionButton: {
+    position: 'relative',
+    float: 'right',
+    marginRight: 10,
+    marginTop: -30,
+  },
   loadingSpinner: {
     textAlign: 'center',
     width: '100%',
@@ -29,12 +38,28 @@ const styles = {
 class TaskList extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      showCreateTask: false,
+    };
+    this.handleTaskCreate = this.handleTaskCreate.bind(this);
   }
 
   componentDidMount() {
     const { dispatch, userId } = this.props;
     dispatch(getUserTasks(userId));
+  }
+
+  handleTaskCreate(task) {
+    const { dispatch, userId } = this.props;
+    this.setState({ showCreateTask: false });
+    const taskInfo = task;
+    taskInfo.owner = userId;
+    console.log(taskInfo);
+    dispatch(createTask(taskInfo, userId));
+  }
+
+  handleTaskCancel() {
+    this.setState({ showCreateTask: false });
   }
 
   render() {
@@ -44,7 +69,7 @@ class TaskList extends React.Component {
           <div className="bump-tab-bar" />
           <Row>
             <Col xs={12} sm={6} smOffset={3}>
-              <div style={styles.loadingSpinner}>
+              <div style={styles.loadingSpinner} onTapT>
                 <CircularProgress />
               </div>
             </Col>
@@ -61,6 +86,15 @@ class TaskList extends React.Component {
               )}
             </List>
           </Card>
+          <FloatingActionButton style={styles.floatingActionButton} onClick={() => (this.setState({ showCreateTask: true }))}>
+            <ContentAdd />
+          </FloatingActionButton>
+          <Dialog
+            open={this.state.showCreateTask}
+            title={'Create New Task'}
+          >
+            <TaskCreate create={this.handleTaskCreate} cancel={this.handleTaskCancel} />
+          </Dialog>
         </div>
       );
     }
@@ -75,6 +109,15 @@ class TaskList extends React.Component {
             </div>
           </Col>
         </Row>
+        <FloatingActionButton style={styles.floatingActionButton}>
+          <ContentAdd />
+        </FloatingActionButton>
+        <Dialog
+          open={this.state.showCreateTask}
+          title={'Create New Task'}
+        >
+          <TaskCreate create={this.handleTaskCreate} cancel={this.handleTaskCancel} />
+        </Dialog>
       </div>
     );
   }
