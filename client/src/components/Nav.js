@@ -79,8 +79,10 @@ class Nav extends React.Component {
 
     const rightButtons = (
       <div>
-        <FlatButton label="Sign Up" containerElement={<Link to="/login" />} style={{ color: 'white' }} />
-        <FlatButton label="Login" containerElement={<Link to="/login" />} style={{ color: 'white' }} />
+        <a href={'/auth/facebook'} >
+          <FlatButton label="Sign Up" style={{ color: 'white' }} />
+          <FlatButton label="Login" style={{ color: 'white' }} />
+        </a>
       </div>
     );
 

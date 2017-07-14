@@ -9,7 +9,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
 import Login from './Login';
-// import Logout from './Logout';
+import Logout from './Logout';
 import PrivateRoute from './PrivateRoute';
 import Nav from './Nav';
 import Today from './Today';
@@ -26,6 +26,7 @@ const App = () => (
           <Nav />
           <Route path="/login" component={Login} />
           <PrivateRoute path="/today" component={Today} />
+          <Route path="/logout" component={Logout} />
         </div>
       </Router>
     </MuiThemeProvider>
