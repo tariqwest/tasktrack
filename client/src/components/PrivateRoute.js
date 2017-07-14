@@ -27,21 +27,19 @@ class PrivateRoute extends React.Component {
       dispatch(setRedirectUrl(redirect));
       dispatch(checkLogin());
     }
-
-    //this.getUserInfoIfReady();
+    this.getUserInfoIfReady();
   }
 
   componentDidUpdate() {
-    //this.getUserInfoIfReady();
+    this.getUserInfoIfReady();
   }
 
-
-  // getUserInfoIfReady() {
-  //   const { dispatch, hasUserInfo, isAuthenticated, userId, isFetchingUser } = this.props;
-  //   if (isAuthenticated && !hasUserInfo && !isFetchingUser) {
-  //     dispatch(getUserInfo(userId));
-  //   }
-  // }
+  getUserInfoIfReady() {
+    const { dispatch, hasUserInfo, isAuthenticated, userId, isFetchingUser } = this.props;
+    if (isAuthenticated && !hasUserInfo && !isFetchingUser) {
+      dispatch(getUserInfo(userId));
+    }
+  }
 
   handleRender() {
     const { isAuthenticated, location, component: Component } = this.props;
@@ -67,8 +65,8 @@ const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated,
   isFetchingAuth: state.auth.isFetching,
   userId: state.auth.userId,
-  //isFetchingUser: state.user.isFetching,
-  //hasUserInfo: state.user.hasInfo,
+  isFetchingUser: state.user.isFetching,
+  hasUserInfo: state.user.hasInfo,
 });
 
 export default withRouter(connect(mapStateToProps)(PrivateRoute));

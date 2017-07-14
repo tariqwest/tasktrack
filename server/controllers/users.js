@@ -19,7 +19,7 @@ module.exports.getAll = (req, res) => {
 
 module.exports.getOne = (req, res) => {
   models.User.findAll({ where: { id: req.query.id } })
-    .then(users => res.status(200).send(users))
+    .then(user => res.status(200).send(user))
     .catch((err) => {
       // This code indicates an outside service (the database) did not respond in time
       res.status(503).send(err);
