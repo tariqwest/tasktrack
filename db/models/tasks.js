@@ -4,19 +4,19 @@ const models = require('.');
 
 const Task = db.define('task', {
   type: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
   },
   title: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
   },
   detail: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
   },
   startTime: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
   },
   endTime: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
   },
   owner: {
     type: Sequelize.INTEGER,
@@ -24,8 +24,8 @@ const Task = db.define('task', {
       model: models.User,
       key: 'id',
       deferrable: Sequelize.Deferrable.INITIALLY_IMMEDIATE,
-    }
- }
+    },
+  },
 });
 
 module.exports = Task;

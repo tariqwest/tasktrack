@@ -36,11 +36,11 @@ module.exports = {
         include: path.join(__dirname, 'client/src'),
         use: 'babel-loader',
       },
-      // {
-      //   test: /\.css$/,
-      //   include: [path.join(__dirname, 'client/src'), /flexboxgrid/],
-      //   use: ['style-loader', 'css-loader'],
-      // },
+      {
+        test: /\.css$/,
+        include: [path.join(__dirname, 'client/src'), /flexboxgrid/],
+        use: ['style-loader', 'css-loader'],
+      },
     ],
   },
 

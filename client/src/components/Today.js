@@ -1,4 +1,5 @@
 import React from 'react';
+import TaskList from './TaskList';
 
 class Today extends React.Component {
 
@@ -7,7 +8,7 @@ class Today extends React.Component {
       <div>
         <div className="bump-bar" />
         <div>
-          Today
+          <TaskList />
         </div>
       </div>
     );

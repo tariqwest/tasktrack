@@ -17,7 +17,7 @@ module.exports.create = (req, res) => {
 };
 
 module.exports.update = (req, res) => {
-  models.Task.update(req.body, {where:{ id: req.body.id}})
+  models.Task.update(req.body, { where: { id: req.body.id } })
     .then(task => res.status(200).send(task))
     .catch((err) => {
       res.status(503).send(err);
@@ -26,7 +26,7 @@ module.exports.update = (req, res) => {
 
 module.exports.delete = (req, res) => {
   models.Task.destroy({ where: { id: req.body.id } })
-    .then(task => res.sendStatus(200))
+    .then(res.sendStatus(200))
     .catch((err) => {
       res.status(503).send(err);
     });
