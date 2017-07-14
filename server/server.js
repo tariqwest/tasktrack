@@ -17,9 +17,15 @@ app.use(middleware.passport.session());
 
 app.use('/auth', routes.auth);
 app.use('/api/users', routes.users);
+app.use('/api/tasks', routes.tasks);
 
 app.use(express.static(path.join(__dirname, '../public')));
- 
+
+// Setup model tables
+// const models = require('../db/models');
+// models.User.sync({force: true});
+// models.Task.sync({force: true});
+
 const server = app.listen(3000, () => {
   console.log('TaskTrack app listening at http://localhost:3000');
 });

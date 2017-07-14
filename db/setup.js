@@ -1,4 +1,5 @@
-const User = require('../db/models/users');
+const models = require('../db/models');
 
-// Setup users model
-User.sync({force: true});
+// Setup model tables
+models.User.sync({force: true});
+models.Task.sync({force: true});

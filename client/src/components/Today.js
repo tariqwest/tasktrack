@@ -5,7 +5,10 @@ class Today extends React.Component {
   render() {
     return (
       <div>
-        Today
+        <div className="bump-bar" />
+        <div>
+          Today
+        </div>
       </div>
     );
   }

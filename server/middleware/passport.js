@@ -9,13 +9,16 @@ passport.serializeUser((user, done) => {
 passport.deserializeUser((id, done) => (
   models.User.findAll({ where: { id: id } })
     .then((user) => {
-      if (!user) {
+      if (user.length === 0) {
         throw user;
       }
       done(null, user[0].dataValues);
     })
     .error((error) => {
       done(error, null);
+    })
+    .catch((error) => {
+      done(JSON.stringify(error), null);
     })
 ));
 
@@ -49,7 +52,7 @@ const getOrCreateUser = (accessToken, profile, done) => {
       return done(null, user[0].dataValues);
     })
     .error((error) => {
-        console.log('*** Error while getting or creating user', error);              
+        console.log('*** Error while getting or creating user', error);
         done(error, null);
     })
 };
