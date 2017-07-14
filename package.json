@@ -56,10 +56,12 @@
   "scripts": {
     "start-prod": "node server/server.js",
     "start-dev": "nodemon server/server.js",
-    "setup-db": "node db/setup.js",
-    "build": "webpack",
     "start-client": "webpack-dev-server --env.dev --open",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build-dev": "webpack --watch",
+    "build-prod": "webpack --env.prod -p --progress",
+    "setup-db": "node db/setup.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "heroku-postbuild": "npm run build-prod && npm run setup-db"
   },
   "repository": {
     "type": "git",

@@ -20,6 +20,9 @@ app.use('/api/users', routes.users);
 app.use('/api/tasks', routes.tasks);
 
 app.use(express.static(path.join(__dirname, '../public')));
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '/../public', 'index.html'));
+});
 
 // Setup model tables
 // const models = require('../db/models');
