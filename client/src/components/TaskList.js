@@ -4,12 +4,26 @@ import { List } from 'material-ui/List';
 import { Row, Col } from 'react-flexbox-grid';
 import { Card } from 'material-ui/Card';
 import FontIcon from 'material-ui/FontIcon';
+import { grey500 } from 'material-ui/styles/colors';
 import CircularProgress from 'material-ui/CircularProgress';
 import Task from './Task';
 import { getUserTasks } from '../actions';
 
-const styles = {
 
+const styles = {
+  loadingSpinner: {
+    textAlign: 'center',
+    width: '100%',
+  },
+  nothingToDisplay: {
+    textAlign: 'center',
+    width: '100%',
+    color: grey500,
+  },
+  nothingToDisplayIcon: {
+    fontSize: '70px',
+    color: grey500,
+  },
 };
 
 class TaskList extends React.Component {
@@ -39,13 +53,15 @@ class TaskList extends React.Component {
       );
     } else if (this.props.tasks.length > 0) {
       return (
-        <Card>
-          <List>
-            {this.props.tasks.map(task =>
-              (<Task task={task} key={task.id} />) // eslint-disable-line
-            )}
-          </List>
-        </Card>
+        <div>
+          <Card>
+            <List>
+              {this.props.tasks.map(task =>
+                (<Task task={task} key={task.id} />) // eslint-disable-line
+              )}
+            </List>
+          </Card>
+        </div>
       );
     }
     return (
