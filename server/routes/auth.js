@@ -6,6 +6,7 @@ const router = express.Router();
 const prefix = process.env.NODE_ENV === 'production' ? '' : 'http://localhost:1337';
 
 router.use((req, res, next) => {
+  console.log('Redirect prefix:', prefix);
   if (req.query && req.query.returnTo) {
     req.session.returnTo = prefix + req.query.returnTo;
   }
@@ -18,7 +19,7 @@ router.get('/facebook', middleware.passport.authenticate('facebook', {
 }));
 
 router.get('/facebook/callback', middleware.passport.authenticate('facebook', {
-  successReturnToOrRedirect: '/profile',
+  successReturnToOrRedirect: '/today',
   failureRedirect: '/login',
 }));
 
