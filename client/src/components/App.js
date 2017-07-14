@@ -7,7 +7,7 @@ import {
 
 import Login from './Login';
 // import Logout from './Logout';
-// import PrivateRoute from './PrivateRoute';
+import PrivateRoute from './PrivateRoute';
 // import Nav from './Nav';
 import Today from './Today';
 
@@ -18,7 +18,7 @@ const App = () => (
     <Router>
       <div className="background">
         <Route path="/login" component={Login} />
-        <Route path="/" component={Today} />
+        <PrivateRoute path="/today" component={Today} />
       </div>
     </Router>
   </Provider>
