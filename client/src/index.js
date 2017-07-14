@@ -1,10 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import TestCounter from './components/TestCounter';
- 
-document.addEventListener('DOMContentLoaded', function() {
+import { AppContainer } from 'react-hot-loader';
+
+import App from './components/App';
+
+const render = (Component) => {
   ReactDOM.render(
-    React.createElement(TestCounter),
-    document.getElementById('app')
+    <AppContainer>
+      <Component />
+    </AppContainer>,
+    document.getElementById('root')
   );
-});
+};
+
+render(App);
