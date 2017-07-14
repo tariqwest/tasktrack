@@ -12,7 +12,7 @@ passport.deserializeUser((id, done) => (
       if (!user) {
         throw user;
       }
-      done(null, user.serialize());
+      done(null, user[0].dataValues);
     })
     .error((error) => {
       done(error, null);
@@ -25,26 +25,31 @@ passport.use('facebook', new FacebookStrategy({
   callbackURL: `${process.env.SERVER_URL}/auth/facebook/callback`,
   profileFields: ['id', 'emails', 'name']
 },
-  (accessToken, refreshToken, profile, done) => getOrCreateUser(accessToken, refreshToken, profile, done))
+  (accessToken, refreshToken, profile, done) => getOrCreateUser(accessToken, profile, done))
 );
 
-const getOrCreateUser = (type, profile, done) => {
+const getOrCreateUser = (accessToken, profile, done) => {
   return models.User.findAll({ where: { facebookId: profile.id } })
     .then((user) => {
-      if (user) {
-        return done(null, user);
+      if (user.length > 0) {
+        console.log('*** User found', user);
+        return done(null, user[0].dataValues);
       } else {
         const userInfo = {
           firstName: profile.name.givenName,
           lastName: profile.name.familyName,
+          facebookId: profile.id,
+          facebookToken: accessToken,
         };
         return models.User.create(userInfo);
       }
     })
     .then((user) => {
-      return done(null, user);
+      console.log('*** User created', user);
+      return done(null, user[0].dataValues);
     })
     .error((error) => {
+        console.log('*** Error while getting or creating user', error);              
         done(error, null);
     })
 };
