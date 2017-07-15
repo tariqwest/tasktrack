@@ -49,7 +49,7 @@ const getOrCreateUser = (accessToken, profile, done) => {
     })
     .then((user) => {
       console.log('*** User created', user);
-      return done(null, user[0].dataValues);
+      return done(null, user.dataValues);
     })
     .error((error) => {
         console.log('*** Error while getting or creating user', error);

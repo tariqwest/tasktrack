@@ -105,12 +105,12 @@ class TaskList extends React.Component {
         <Row>
           <Col xs={12} sm={6} smOffset={3}>
             <div style={styles.nothingToDisplay}>
-              <FontIcon style={styles.nothingToDisplayIcon} className="material-icons">person_pin</FontIcon>
+              <FontIcon style={styles.nothingToDisplayIcon} className="material-icons">check_box</FontIcon>
               <h2>No tasks yet, create some!</h2>
             </div>
           </Col>
         </Row>
-        <FloatingActionButton style={styles.floatingActionButton}>
+        <FloatingActionButton style={styles.floatingActionButton} onClick={() => (this.setState({ showCreateTask: true }))}>
           <ContentAdd />
         </FloatingActionButton>
         <Dialog
