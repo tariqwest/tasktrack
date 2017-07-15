@@ -61,7 +61,7 @@
     "build-prod": "webpack --env.prod -p --progress",
     "setup-db": "node db/setup.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "heroku-postbuild": "npm run build-prod && npm run setup-db"
+    "heroku-postbuild": "npm run build-prod"
   },
   "repository": {
     "type": "git",
