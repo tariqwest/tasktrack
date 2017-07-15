@@ -24,11 +24,8 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '/../public', 'index.html'));
 });
 
-// Setup model tables
-// const models = require('../db/models');
-// models.User.sync({force: true});
-// models.Task.sync({force: true});
+const PORT = process.env.PORT || 3000;
 
-const server = app.listen(3000, () => {
-  console.log('TaskTrack app listening at http://localhost:3000');
+const server = app.listen(PORT, () => {
+  console.log(`TaskTrack app listening at ${process.env.SERVER_URL}`);
 });
